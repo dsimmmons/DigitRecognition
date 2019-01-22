@@ -1,4 +1,4 @@
-﻿
+
 #include "reader.h"
 #include "network.h"
 #include <chrono>
@@ -16,7 +16,7 @@ void drawImage(int image, reader a, reader b)
 			}
 			else if ((int)(10 * (a.getPixel(image * 784 + i * 28 + j))) > 3)
 			{
-				std::cout << "o ";
+				std::cout << "x ";
 			}
 			else
 			{
@@ -29,13 +29,22 @@ void drawImage(int image, reader a, reader b)
 
 int main()
 {
-	reader images("C:\\Users\\denve\\OneDrive\\Documents\\MLData\\MNISTDatabase\\MNIST\\train-images-idx3-ubyte\\train-images.idx3-ubyte");
-	reader labels("C:\\Users\\denve\\OneDrive\\Documents\\MLData\\MNISTDatabase\\MNIST\\train-labels-idx1-ubyte\\train-labels.idx1-ubyte");
+	reader images("Paste pathway for training images here");
+	reader labels("Paste pathway for training labels here");
 
-	reader testImages("C:\\Users\\denve\\OneDrive\\Documents\\MLData\\MNISTDatabase\\MNIST\\t10k-images-idx3-ubyte\\testImages.idx3-ubyte");
-	reader testLabels("C:\\Users\\denve\\OneDrive\\Documents\\MLData\\MNISTDatabase\\MNIST\\t10k-labels-idx1-ubyte\\trainLabels.idx1-ubyte");
+	reader testImages("Paste pathway for testing images here");
+	reader testLabels("Paste pathway for testing labels here");
 
-	network myNetwork(4, 784, 30, 10); 
+	int arg1, arg2;
+
+	std::cout << "Input number of layers (recomended 4): ";
+	std::cin >> arg1;
+	std::cout << endl;
+	std::cout << endl << "Input number of neurons per hidden layer (recomended 30): ";
+	std::cin >> arg2;
+	std::cout << endl;
+
+	network myNetwork(arg1, 784, arg2, 10); 
 	// First Number is the number of layers. 3 is the minimum(input->hidden->output). Higher values for more hidden layers. Mess with this!
 	// Second Number is the number on inputs. Keep this at 784 for the number of pixels in the training images
 	// Third number is the number of neurons in each hidden layer. Mess with this!
@@ -43,11 +52,21 @@ int main()
 
 	int numElements = images.getNumElements();
 
-	int numTests = 100; // Mess with this! Make sure that numTests * miniBatchSize is more than 1000 and less than 60000
+	int miniBatchSize; // Mess with this!
 
-	int miniBatchSize(10); // Mess with this!
+	int numTests; // Mess with this! Make sure that numTests * miniBatchSize is more than 1000 and less than 60000
 
-	float learningRate(1.5f); // Mess with this!
+	float learningRate; // Mess with this!
+
+	std::cout << "Input number of training images per batch(recomended: 10): ";
+	std::cin >> miniBatchSize;
+	std::cout << endl;
+	std::cout << "Input number of training batches you want to run(recomended 1000): ";
+	std::cin >> numTests;
+	std::cout << endl;
+	std::cout << "Input learning rate(recomended 1): ";
+	std::cin >> learningRate;
+	std::cout << endl;
 
 	float myBatchCost(0.3f);
 
@@ -84,14 +103,15 @@ int main()
 	//=======================================================================================================================================================================================
 
 	// See your results
-
-	do
-	{
-		cout << "Type ENTER to see results" << endl;
-	} while (cin.get() != '\n');
+	char c;
+	cout << "Press any key to see results" << endl;
+	cin >> c;
 
 	using namespace std::this_thread;
 	using namespace std::chrono;
+
+	int correct(0);
+	float accuracy(0.0f);
 
 	for (int m = 0; m < testImages.getNumElements(); m++)
 	{
@@ -101,8 +121,10 @@ int main()
 		}
 		myNetwork.think();
 		myNetwork.calculateCost(testLabels.getLabel(m));
+		correct += myNetwork.isCorrect();
 		drawImage(m, testImages, testLabels);
 		std::cout << endl << "Machines Answer : " << myNetwork.getAnswer() << endl;
+		std::cout << endl << "Accumulated Accuracy : " << 100 * ((float)(correct) / (float)(m)) << "% " << endl;
 		sleep_until(system_clock::now() + seconds(1));
 	}
 	return 0;
