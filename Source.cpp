@@ -29,6 +29,7 @@ void drawImage(int image, reader a, reader b)
 
 int main()
 {
+	// GET DATAFILE HERE: http://yann.lecun.com/exdb/mnist/
 	reader images("Paste pathway for training images here");
 	reader labels("Paste pathway for training labels here");
 
