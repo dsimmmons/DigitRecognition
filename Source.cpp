@@ -60,13 +60,13 @@ int main()
 
 	float learningRate; // Mess with this!
 
-	std::cout << "Input number of training images per batch(recomended: 10): ";
+	std::cout << "Input number of training images per batch (recomended: 10): ";
 	std::cin >> miniBatchSize;
 	std::cout << endl;
-	std::cout << "Input number of training batches you want to run(recomended 1000): ";
+	std::cout << "Input number of training batches you want to run (recomended 1000): ";
 	std::cin >> numTests;
 	std::cout << endl;
-	std::cout << "Input learning rate(recomended 1): ";
+	std::cout << "Input learning rate (recomended 1): ";
 	std::cin >> learningRate;
 	std::cout << endl;
 
