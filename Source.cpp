@@ -42,7 +42,7 @@ int main()
 	std::cout << "Input number of layers (recomended 4): ";
 	std::cin >> arg1;
 	std::cout << endl;
-	std::cout << endl << "Input number of neurons per hidden layer (recomended 30): ";
+	std::cout << "Input number of neurons per hidden layer (recomended 30): ";
 	std::cin >> arg2;
 	std::cout << endl;
 
