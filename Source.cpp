@@ -29,6 +29,7 @@ void drawImage(int image, reader a, reader b)
 
 int main()
 {
+	std::cout << "Reading Files, Please Wait" << endl << endl;
 	// GET DATAFILE HERE: http://yann.lecun.com/exdb/mnist/
 	reader images("Paste pathway for training images here");
 	reader labels("Paste pathway for training labels here");
