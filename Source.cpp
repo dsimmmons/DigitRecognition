@@ -54,11 +54,11 @@ int main()
 
 	int numElements = images.getNumElements();
 
-	int miniBatchSize; // Mess with this!
+	int miniBatchSize; 
 
-	int numTests; // Mess with this! Make sure that numTests * miniBatchSize is more than 1000 and less than 60000
+	int numTests; 
 
-	float learningRate; // Mess with this!
+	float learningRate; 
 
 	std::cout << "Input number of training images per batch (recomended: 10): ";
 	std::cin >> miniBatchSize;
