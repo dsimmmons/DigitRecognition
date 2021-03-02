@@ -44,6 +44,10 @@ public:
 	//==============================================================
 	float getPixel(int nIndex) const
 	{
+		if (nIndex + dataIndex >= fileMapV.size())
+		{
+			return 0.0f;
+		}
 		int a = fileMapV[nIndex + dataIndex];
 		return ((float)a / 255);
 	}
