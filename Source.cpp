@@ -126,7 +126,7 @@ int main()
 		correct += myNetwork.isCorrect();
 		drawImage(m, testImages, testLabels);
 		std::cout << endl << "Machines Answer : " << myNetwork.getAnswer() << endl;
-		std::cout << endl << "Accumulated Accuracy : " << 100 * ((float)(correct) / (float)(m)) << "% " << endl;
+		std::cout << endl << "Accumulated Accuracy : " << 100 * ((float)(correct) / (float)(m + 1)) << "% " << endl;
 		sleep_until(system_clock::now() + seconds(1));
 	}
 	return 0;
